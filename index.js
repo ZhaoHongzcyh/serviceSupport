@@ -1,11 +1,6 @@
 const express = require('express');
 const app = express();
 
-const Tool = require("./util/tool");
-
-//API接口路由
-const Router = express.Router();
-
 const bodyParser = require("body-parser");
 
 // 引入工具函数
