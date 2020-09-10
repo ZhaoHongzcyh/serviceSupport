@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const mysql = require('mysql');
 const moment = require("moment"); // 引入时间格式包
+const request = require("request"); // 引入请求接口的包
+const requestIp = require('request-ip');
 
 // 引入数据库相关的配置信息
 const mysqlConfig = require("../config/projectConfig/mysql.config");
@@ -74,7 +76,6 @@ const getErrCode = ( key, isGetInfo = false /** 是否获取错误码的详细�
 // 用于执行mysql语句的工具函数
 const implementSql = (sql, query, sqlPool = null) => {
     const pool = sqlPool? sqlPool : global.MYSQLPOOL;
-    const errorItem = getErrCode('common_sql_error');
 
     return new Promise( (resolve, reject) => {
         let errorItem = getErrCode("common_cant_get_sqlpool")
@@ -112,13 +113,49 @@ const getCurrentTime = () => {
     return time;
 }
 
+// 请求第三方或者本机接口
+const requestApi = ( baseOption ) => {
+    /**
+     * baseOption结构
+     * baseOption = {
+        url: url,
+        method: "POST",
+        json: true,
+        headers: {
+            "content-type": "application/json",
+        },
+        body: ''
+    }
+     */
+    new Promise( (resolve, reject) => {
+        request(option, (error, res, body) => {
+            let option = {error, res, body};
+
+            resolve(option);
+            
+            // 记录请求的异常
+            if( !error ){ return }
+            writeLogs(error);
+        })
+    })
+    
+}
+
+// 获取客户端ip
+const getClientIp = (req) => {
+    const clientIp = requestIp.getClientIp(req);
+    return clientIp;
+}
+
 const option = {
     getMysqlConfig,
     initMysqlPool,
     getPoolCtx,
     getErrCode,
     implementSql,
-    writeLogs
+    writeLogs,
+    requestApi,
+    getClientIp
 }
 
 
