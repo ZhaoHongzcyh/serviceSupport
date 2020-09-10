@@ -10,6 +10,8 @@ README.md：项目说明文件
 
     tool.js: 项目中封装的工具函数
     validator.js: 项目中常用的正则校验工具函数
+    auth.js: 权限校验文件
+    business.js: 与业务相关的工具函数
 
 /static
 
@@ -33,4 +35,8 @@ README.md：项目说明文件
     projectConfig：项目相关的配置文件
         /errorCode.config.js: 项目全局错误码配置文件
         /mysql.config.js: 项目中mysql的配置文件
+
+/logs
+
+    log.txt: 记录系统相关的日志
     

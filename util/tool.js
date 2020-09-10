@@ -3,6 +3,7 @@ const fs = require('fs');
 const mysql = require('mysql');
 const moment = require("moment"); // 引入时间格式包
 const request = require("request"); // 引入请求接口的包
+const requestIp = require('request-ip');
 
 // 引入数据库相关的配置信息
 const mysqlConfig = require("../config/projectConfig/mysql.config");
@@ -140,6 +141,12 @@ const requestApi = ( baseOption ) => {
     
 }
 
+// 获取客户端ip
+const getClientIp = (req) => {
+    const clientIp = requestIp.getClientIp(req);
+    return clientIp;
+}
+
 const option = {
     getMysqlConfig,
     initMysqlPool,
@@ -147,7 +154,8 @@ const option = {
     getErrCode,
     implementSql,
     writeLogs,
-    requestApi
+    requestApi,
+    getClientIp
 }
 
 
