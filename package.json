@@ -1,0 +1,18 @@
+{
+  "name": "application-frame",
+  "version": "1.0.0",
+  "description": "a simple of node frame",
+  "main": "index.js",
+  "scripts": {
+    "dev": "set NODE_ENV=dev&&node index.js",
+    "start": "set NODE_ENV=production&node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zznode",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "mysql": "^2.18.1"
+  }
+}
