@@ -78,7 +78,10 @@ const implementSql = (sql, query, sqlPool = null) => {
     const pool = sqlPool? sqlPool : global.MYSQLPOOL;
 
     return new Promise( (resolve, reject) => {
-        let errorItem = getErrCode("common_cant_get_sqlpool")
+        let errorItem = getErrCode("common_cant_get_sqlpool");
+        // 记录执行的sql语句
+        writeLogs(sql);
+
         if( !pool ){
             writeLogs(errorItem.desc);
         }
@@ -128,13 +131,14 @@ const requestApi = ( baseOption ) => {
     }
      */
     new Promise( (resolve, reject) => {
-        request(option, (error, res, body) => {
+        request(baseOption, (error, res, body) => {
             let option = {error, res, body};
 
             resolve(option);
             
             // 记录请求的异常
             if( !error ){ return }
+            error = `request address is ${baseOption.url} ----- errorInfo is ${error}`;
             writeLogs(error);
         })
     })

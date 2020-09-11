@@ -1,3 +1,6 @@
+/**
+ * 本服务需要的数据库相关配置信息
+ */
 const mysqlOption = {
     // 生产环境数据库的配置
     production: {

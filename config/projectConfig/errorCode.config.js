@@ -1,3 +1,6 @@
+/**
+ * 系统错误信息
+ */
 const errcode = [
     {   
         key: 'common_cant_get_connection',

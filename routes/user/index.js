@@ -1,14 +1,13 @@
+/**
+ * 系统用户模块api接口
+ */
+
 const express = require('express');
 const userRouter = express.Router();
 
-const tool = require("../../util/tool");
-const sqlTool = require("../../util/business");
+const userBusiness = require("./businessUser");
 
-userRouter.get("/getUserInfo",async (req, res) => {
-    const sql = sqlTool.getUserModultSql('getUserInfo');
-    const option = await tool.implementSql(sql, []);
-
-    res.send( option );
-})
+// 获取用户详情
+userRouter.get("/getUserInfo", userBusiness.getUserInfo);
 
 module.exports = userRouter;
